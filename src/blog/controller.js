@@ -10,3 +10,12 @@ async function createBlog(req, res, next) {
     next(err);
   }
 }
+
+async function getAllBlogs(req, res, next) {
+  try {
+    const blogs = await Service.getAllBlogs();
+    res.status(200).json({ message: "blogs list", blogs });
+  } catch (err) {
+    next(err);
+  }
+}
