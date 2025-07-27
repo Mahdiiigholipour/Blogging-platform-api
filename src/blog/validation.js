@@ -39,8 +39,6 @@ const createBlog = [
 ];
 
 const updateBlogById = [
-  param("id").custom(isValidId),
-
   body("title")
     .optional()
     .isString()
@@ -68,5 +66,6 @@ const updateBlogById = [
     .withMessage("All tags must be strings"),
 ];
 
-const getBlogById = [param("id").custom(isValidId)];
-const deleteBlogById = [param("id").custom(isValidId)];
+const idInParams = [param("id").custom(isValidId)];
+
+module.exports = { createBlog, updateBlogById, idInParams };
