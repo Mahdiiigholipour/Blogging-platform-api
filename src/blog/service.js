@@ -33,3 +33,11 @@ async function deleteBlogById(id) {
   });
   return result;
 }
+
+module.exports = {
+  createBlog,
+  getAllBlogs,
+  getBlogById,
+  deleteBlogById,
+  updateBlogById,
+};
