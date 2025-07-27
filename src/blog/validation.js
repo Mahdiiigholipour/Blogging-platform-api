@@ -1,4 +1,4 @@
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 const { default: mongoose } = require("mongoose");
 
 const isValidId = (value) => {
@@ -26,12 +26,12 @@ const createBlog = [
     .withMessage("Content must be at least 20 characters long"),
 
   body("category")
+    .optional()
     .isString()
-    .withMessage("Category must be a string")
-    .notEmpty()
-    .withMessage("Category is required"),
+    .withMessage("Category must be a string"),
 
   body("tags")
+    .optional()
     .isArray()
     .withMessage("Tags must be an array of strings")
     .custom((arr) => arr.every((tag) => typeof tag === "string"))
