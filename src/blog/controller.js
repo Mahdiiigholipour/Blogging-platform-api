@@ -46,3 +46,12 @@ async function updateBlogById(req, res, next) {
     next(err);
   }
 }
+
+async function deleteBlogById(req, res, next) {
+  try {
+    await Service.deleteBlogById(req.params?.id);
+    res.status(200).json({ message: "blog deleted successfully." });
+  } catch (err) {
+    next(err);
+  }
+}
