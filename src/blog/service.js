@@ -10,3 +10,8 @@ async function createBlog(blogData) {
 
   return blog;
 }
+
+async function getAllBlogs() {
+  const blogs = await BlogModel.find();
+  return blogs;
+}
