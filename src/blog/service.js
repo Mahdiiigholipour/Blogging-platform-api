@@ -21,6 +21,12 @@ async function getBlogById(id) {
   return blog;
 }
 
+async function updateBlogById(id, newData) {
+  const blog = await BlogModel.findByIdAndUpdate(id, newData).catch((err) => {
+    throw { status: 404, message: "notfound blog" };
+  });
+}
+
 async function deleteBlogById(id) {
   const result = await BlogModel.findByIdAndDelete(id).catch((err) => {
     throw { status: 404, message: "blog not found" };
