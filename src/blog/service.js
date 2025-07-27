@@ -15,3 +15,15 @@ async function getAllBlogs() {
   const blogs = await BlogModel.find();
   return blogs;
 }
+
+async function getBlogById(id) {
+  const blog = await BlogModel.findById(id);
+  return blog;
+}
+
+async function deleteBlogById(id) {
+  const result = await BlogModel.findByIdAndDelete(id).catch((err) => {
+    throw { status: 404, message: "blog not found" };
+  });
+  return result;
+}
