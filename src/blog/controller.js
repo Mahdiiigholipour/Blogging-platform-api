@@ -20,7 +20,7 @@ async function getAllBlogs(req, res, next) {
   }
 }
 
-async function getOneBlogs(req, res, next) {
+async function getBlogById(req, res, next) {
   try {
     const blog = await Service.getBlogById(req.params?.id);
     res.status(200).json(blog);
@@ -55,3 +55,11 @@ async function deleteBlogById(req, res, next) {
     next(err);
   }
 }
+
+module.exports = {
+  createBlog,
+  getAllBlogs,
+  getBlogById,
+  updateBlogById,
+  deleteBlogById,
+};
