@@ -19,3 +19,12 @@ async function getAllBlogs(req, res, next) {
     next(err);
   }
 }
+
+async function getOneBlogs(req, res, next) {
+  try {
+    const blog = await Service.getBlogById(req.params?.id);
+    res.status(200).json(blog);
+  } catch (err) {
+    next(err);
+  }
+}
