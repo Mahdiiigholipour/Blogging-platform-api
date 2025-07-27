@@ -28,3 +28,21 @@ async function getOneBlogs(req, res, next) {
     next(err);
   }
 }
+
+async function updateBlogById(req, res, next) {
+  try {
+    const { title, content, category, tags } = req.body;
+    const updatedBlog = await Service.updateBlogById(req.params?.id, {
+      title,
+      content,
+      category,
+      tags,
+    });
+
+    res
+      .status(200)
+      .json({ message: "blog updated successfully.", blog: updatedBlog });
+  } catch (err) {
+    next(err);
+  }
+}
