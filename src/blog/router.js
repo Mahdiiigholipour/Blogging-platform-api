@@ -8,3 +8,5 @@ router
   .get(Controller.getBlogById)
   .put(Controller.updateBlogById)
   .delete(Controller.deleteBlogById);
+
+module.exports = router;
