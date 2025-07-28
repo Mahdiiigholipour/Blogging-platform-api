@@ -1,7 +1,7 @@
 const BlogModel = require("./model");
 const buildBlogFilter = require("../utils/blogFilter");
 
-async function createBlog(blogData) {
+exports.createBlog = async function (blogData) {
   const blog = await BlogModel.create({
     title: blogData.title,
     content: blogData.content,
@@ -10,9 +10,9 @@ async function createBlog(blogData) {
   });
 
   return blog;
-}
+};
 
-async function getAllBlogs(filterParams, pagination) {
+exports.getAllBlogs = async function (filterParams, pagination) {
   const filter = buildBlogFilter(filterParams);
   const blogs = BlogModel.find(filter)
     .skip(pagination.page * pagination.limit)
@@ -22,28 +22,21 @@ async function getAllBlogs(filterParams, pagination) {
       throw new Error("cant get blogs");
     });
   return blogs;
-}
-async function getBlogById(id) {
+};
+
+exports.getBlogById = async function (id) {
   const blog = await BlogModel.findById(id);
   return blog;
-}
+};
 
-async function updateBlogById(id, newData) {
+exports.updateBlogById = async function (id, newData) {
   const blog = await BlogModel.findByIdAndUpdate(id, newData, { new: true });
   return blog;
-}
+};
 
-async function deleteBlogById(id) {
+exports.deleteBlogById = async function (id) {
   const result = await BlogModel.findByIdAndDelete(id).catch((err) => {
     throw { status: 404, message: "blog not found" };
   });
   return result;
-}
-
-module.exports = {
-  createBlog,
-  getAllBlogs,
-  getBlogById,
-  deleteBlogById,
-  updateBlogById,
 };
