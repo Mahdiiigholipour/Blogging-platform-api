@@ -1,6 +1,6 @@
 const Service = require("./service");
 
-async function createBlog(req, res, next) {
+exports.createBlog = async function (req, res, next) {
   try {
     const { title, content, category, tags } = req.body;
     const blog = await Service.createBlog({ title, content, category, tags });
@@ -9,9 +9,9 @@ async function createBlog(req, res, next) {
   } catch (err) {
     next(err);
   }
-}
+};
 
-async function getAllBlogs(req, res, next) {
+exports.getAllBlogs = async function (req, res, next) {
   try {
     const page = parseInt(req.query?.page, 10) || 0;
     const limit = parseInt(req.query?.limit, 10) || 0;
@@ -26,18 +26,18 @@ async function getAllBlogs(req, res, next) {
   } catch (err) {
     next(err);
   }
-}
+};
 
-async function getBlogById(req, res, next) {
+exports.getBlogById = async function (req, res, next) {
   try {
     const blog = await Service.getBlogById(req.params?.id);
     res.status(200).json(blog);
   } catch (err) {
     next(err);
   }
-}
+};
 
-async function updateBlogById(req, res, next) {
+exports.updateBlogById = async function (req, res, next) {
   try {
     const { title, content, category, tags } = req.body;
     const updatedBlog = await Service.updateBlogById(req.params?.id, {
@@ -53,21 +53,13 @@ async function updateBlogById(req, res, next) {
   } catch (err) {
     next(err);
   }
-}
+};
 
-async function deleteBlogById(req, res, next) {
+exports.deleteBlogById = async function (req, res, next) {
   try {
     await Service.deleteBlogById(req.params?.id);
     res.status(200).json({ message: "blog deleted successfully." });
   } catch (err) {
     next(err);
   }
-}
-
-module.exports = {
-  createBlog,
-  getAllBlogs,
-  getBlogById,
-  updateBlogById,
-  deleteBlogById,
 };
