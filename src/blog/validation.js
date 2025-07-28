@@ -8,7 +8,7 @@ const isValidId = (value) => {
   return true;
 };
 
-const getAllBlogs = [
+exports.getAllBlogs = [
   query("page")
     .optional()
     .isInt({ min: 0 })
@@ -40,7 +40,7 @@ const getAllBlogs = [
     .withMessage("Tags must be a comma-separated string"),
 ];
 
-const createBlog = [
+exports.createBlog = [
   body("title")
     .isString()
     .withMessage("Title must be a string")
@@ -70,7 +70,7 @@ const createBlog = [
     .withMessage("All tags must be strings"),
 ];
 
-const updateBlogById = [
+exports.updateBlogById = [
   body("title")
     .optional()
     .isString()
@@ -98,6 +98,4 @@ const updateBlogById = [
     .withMessage("All tags must be strings"),
 ];
 
-const idInParams = [param("id").custom(isValidId)];
-
-module.exports = { createBlog, updateBlogById, idInParams, getAllBlogs };
+exports.idInParams = [param("id").custom(isValidId)];
