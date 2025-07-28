@@ -1,4 +1,4 @@
-const Service = require("./service");
+const Service = require("../service/service");
 
 exports.createBlog = async function (req, res, next) {
   try {

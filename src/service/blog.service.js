@@ -1,4 +1,4 @@
-const BlogModel = require("./model");
+const BlogModel = require("../model/blog.model");
 const buildBlogFilter = require("../utils/blogFilter");
 const AppError = require("../utils/Error");
 
