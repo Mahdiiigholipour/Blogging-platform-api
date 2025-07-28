@@ -14,7 +14,7 @@ async function createBlog(req, res, next) {
 async function getAllBlogs(req, res, next) {
   try {
     const page = parseInt(req.query?.page, 10) || 0;
-    const limit = parseInt(req.query?.limit, 10) || 1;
+    const limit = parseInt(req.query?.limit, 10) || 0;
 
     const blogs = await Service.getAllBlogs({ page, limit });
     res.status(200).json({ message: "blogs list", blogs });
