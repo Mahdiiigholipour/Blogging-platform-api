@@ -16,7 +16,7 @@ async function getAllBlogs(req, res, next) {
     const page = parseInt(req.query?.page, 10) || 0;
     const limit = parseInt(req.query?.limit, 10) || 0;
 
-    const { title, category, tags } = req.body;
+    const { title, category, tags } = req.query;
 
     const blogs = await Service.getAllBlogs(
       { title, category, tags },
