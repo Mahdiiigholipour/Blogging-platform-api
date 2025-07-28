@@ -11,9 +11,17 @@ async function createBlog(blogData) {
   return blog;
 }
 
-async function getAllBlogs() {
-  const blogs = await BlogModel.find();
-  return blogs;
+async function getAllBlogs(pagination) {
+  BlogModel.find()
+    .skip(pagination.page * pagination.limit)
+    .limit(pagination.limit)
+    .exec()
+    .then((docs) => {
+      return docs;
+    })
+    .catch((err) => {
+      throw new Error("cant get blogs");
+    });
 }
 
 async function getBlogById(id) {
