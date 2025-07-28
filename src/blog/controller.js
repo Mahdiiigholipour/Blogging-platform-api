@@ -13,7 +13,10 @@ async function createBlog(req, res, next) {
 
 async function getAllBlogs(req, res, next) {
   try {
-    const blogs = await Service.getAllBlogs();
+    const page = parseInt(req.query?.page, 10) || 0;
+    const limit = parseInt(req.query?.limit, 10) || 1;
+
+    const blogs = await Service.getAllBlogs({ page, limit });
     res.status(200).json({ message: "blogs list", blogs });
   } catch (err) {
     next(err);
