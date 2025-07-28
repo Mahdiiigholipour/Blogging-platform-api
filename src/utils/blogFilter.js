@@ -6,7 +6,7 @@
  * @param {string|string[]} [params.tags] – single tag or comma-separated list of tags
  * @returns {Object} mongoose filter
  */
-module.exports = function buildBlogFilter({ title, category, tags }) {
+function buildBlogFilter({ title, category, tags }) {
   const filter = {};
 
   if (title) filter.title = { $regex: title, $options: "i" };
@@ -29,4 +29,6 @@ module.exports = function buildBlogFilter({ title, category, tags }) {
   }
 
   return filter;
-};
+}
+
+module.exports = buildBlogFilter;
