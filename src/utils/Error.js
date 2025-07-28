@@ -12,13 +12,13 @@ class AppError extends Error {
   }
 
   static notFoundHandler(req, res, next) {
-    next(new AppError(`مسیر ${req.originalUrl} پیدا نشد`, 404));
+    next(new AppError(`not found route : ${req.originalUrl}`, 404));
   }
 
   static globalErrorHandler(err, req, res, next) {
     if (!(err instanceof AppError)) {
       err = new AppError(
-        err.message || "خطای داخلی سرور",
+        err.message || "InternalServerError",
         err.statusCode || 500
       );
       err.isOperational = false;
