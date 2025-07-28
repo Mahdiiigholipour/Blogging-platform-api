@@ -1,18 +1,11 @@
 const router = require("express").Router();
-const validateReq = require("../middleware/validateRequest");
-const Controller = require("./controller");
-const Validation = require("./validation");
+const BlogController = require("../controller/blog.controller");
+const BlogValidation = require("../validation/blog.validation");
+const validateReq = require("../common/middleware/validateRequest");
 
 router
   .route("/blog")
-  .get(Validation.getAllBlogs, validateReq, Controller.getAllBlogs)
-  .post(Validation.createBlog, validateReq, Controller.createBlog);
+  .get(BlogValidation.getAllBlogs, validateReq, BlogController.getAllBlogs)
+  .post(BlogValidation.createBlog, validateReq, BlogController.createBlog);
 
-router
-  .use(Validation.idInParams, validateReq)
-  .route("/blog/:id")
-  .get(Controller.getBlogById)
-  .put(Validation.updateBlogById, validateReq, Controller.updateBlogById)
-  .delete(Controller.deleteBlogById);
-
-module.exports = router;
+module.exports = { BlogRoutes: router };
