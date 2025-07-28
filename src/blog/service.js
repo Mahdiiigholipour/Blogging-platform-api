@@ -1,4 +1,5 @@
 const BlogModel = require("./model");
+const buildBlogFilter = require("../utils/blogFilter");
 
 async function createBlog(blogData) {
   const blog = await BlogModel.create({
@@ -11,8 +12,9 @@ async function createBlog(blogData) {
   return blog;
 }
 
-async function getAllBlogs(filterParams,pagination) {
-  const blogs = BlogModel.find()
+async function getAllBlogs(filterParams, pagination) {
+  const filter = buildBlogFilter(filterParams);
+  const blogs = BlogModel.find(filter)
     .skip(pagination.page * pagination.limit)
     .limit(pagination.limit)
     .exec()
