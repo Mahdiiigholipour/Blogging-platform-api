@@ -1,4 +1,4 @@
-const { body, param } = require("express-validator");
+const { body, param, query } = require("express-validator");
 const { default: mongoose } = require("mongoose");
 
 const isValidId = (value) => {
@@ -7,6 +7,20 @@ const isValidId = (value) => {
 
   return true;
 };
+
+const getAllBlogs = [
+  query("page")
+    .optional()
+    .isInt({ min: 0 })
+    .withMessage("page must be an integer greater than or equal to 0")
+    .toInt(),
+  ,
+  query("limit")
+    .optional()
+    .isInt({ min: 1 })
+    .withMessage("limit must be an integer greater than or equal to 1")
+    .toInt(),
+];
 
 const createBlog = [
   body("title")
@@ -68,4 +82,4 @@ const updateBlogById = [
 
 const idInParams = [param("id").custom(isValidId)];
 
-module.exports = { createBlog, updateBlogById, idInParams };
+module.exports = { createBlog, updateBlogById, idInParams, getAllBlogs };

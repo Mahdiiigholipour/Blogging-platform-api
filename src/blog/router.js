@@ -5,7 +5,7 @@ const Validation = require("./validation");
 
 router
   .route("/blog")
-  .get(Controller.getAllBlogs)
+  .get(Validation.getAllBlogs, validate, Controller.getAllBlogs)
   .post(Validation.createBlog, validate, Controller.createBlog);
 
 router
