@@ -4,6 +4,7 @@ const {
   notFoundHandler,
   exceptionHandler,
 } = require("./middleware/errorHandler");
+const AppError = require("./utils/Error");
 
 const app = express();
 
@@ -13,6 +14,6 @@ require("./config/mongoose");
 
 app.use(router);
 
-app.use(notFoundHandler);
-app.use(exceptionHandler);
+app.use(AppError.notFoundHandler);
+app.use(AppError.globalErrorHandler);
 module.exports = app;
