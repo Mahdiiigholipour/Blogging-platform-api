@@ -32,5 +32,5 @@ exports.deleteBlogById = async function (id) {
   const deleted = await BlogModel.findByIdAndDelete(id);
   if (!deleted) throw new AppError("not found any blog to delete!", 404);
 
-  return result;
+  return deleted;
 };
