@@ -21,24 +21,23 @@ const getAllBlogs = [
     .withMessage("limit must be an integer greater than or equal to 1")
     .toInt(),
 
-  body("title")
+  query("title")
     .optional()
     .isString()
     .withMessage("Title must be a string")
     .isLength({ min: 5, max: 100 })
     .withMessage("Title must be between 5 and 100 characters"),
 
-  body("category")
+  query("category")
     .optional()
     .isString()
     .withMessage("Category must be a string"),
 
-  body("tags")
+  query("tags")
     .optional()
-    .isArray()
-    .withMessage("Tags must be an array of strings")
-    .custom((arr) => arr.every((tag) => typeof tag === "string"))
-    .withMessage("All tags must be strings"),
+    .isString()
+    .matches(/^[^,]+(,[^,]+)*$/)
+    .withMessage("Tags must be a comma-separated string"),
 ];
 
 const createBlog = [

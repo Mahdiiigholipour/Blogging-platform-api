@@ -11,7 +11,7 @@ async function createBlog(blogData) {
   return blog;
 }
 
-async function getAllBlogs(pagination) {
+async function getAllBlogs(filterParams,pagination) {
   const blogs = BlogModel.find()
     .skip(pagination.page * pagination.limit)
     .limit(pagination.limit)
