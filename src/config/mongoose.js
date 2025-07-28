@@ -1,11 +1,21 @@
 const mongoose = require("mongoose");
-const { MONGO_URL } = require(".");
+const AppError = require("../utils/Error");
+const { MONGO_URL } = require("./index");
 
-mongoose
-  .connect(MONGO_URL)
-  .then(() => console.log("MongoDB Connected successfully"))
-  .catch((err) =>
-    console.log("MongoDB connection faild! info:" + err.stack + err.message)
-  );
+const connectDB = async () => {
+  try {
+    await mongoose.connect(MONGO_URL);
+    console.log("MongoDB connected successfully");
+  } catch (err) {
+    console.log("MongoDB connection error:", err);
+    // خروج از پروسه در صورت شکست اتصال
+    throw new AppError("Database connection failed", 500);
+  }
 
-module.exports = mongoose;
+  mongoose.connection.on("disconnected", () => {
+    console.log("MongoDB disconnected! Attempting reconnect…");
+    setTimeout(connectDB, 5000);
+  });
+};
+
+module.exports = connectDB;
