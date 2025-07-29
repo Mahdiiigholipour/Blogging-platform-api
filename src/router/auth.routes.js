@@ -11,11 +11,11 @@ router.post(
 );
 router.post("/login", AdminValidation.login, validateReq, AuthController.login);
 
-router.post(
-  "/refresh_token",
-  AdminValidation.refreshToken,
-  validateReq,
-  AuthController.refreshToken
-);
+// router.post(
+//   "/refresh_token",
+//   AdminValidation.refreshToken,
+//   validateReq,
+//   AuthController.refreshToken
+// );
 
 module.exports = { AuthRoutes: router };
