@@ -19,3 +19,20 @@ exports.register = async function (data) {
 
   return { admin, refreshToken, accessToken };
 };
+
+exports.login = async function (data) {
+  const admin = await AdminModel.findOne({ email: data.email });
+  if (!admin) throw new AppError("email or password incorrect", 401);
+
+  if (!(await admin.comparePassword(data.password)))
+    throw new AppError("email or password incorrect", 401);
+
+  const { accessToken, refreshToken } = TokenHelper.sign(admin);
+
+  await AuthModel.findOneAndUpdate(
+    { admin: admin._id },
+    { $set: { accessToken, refreshToken } }
+  );
+
+  return { admin, refreshToken, accessToken };
+};

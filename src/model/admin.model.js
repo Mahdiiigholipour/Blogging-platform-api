@@ -18,8 +18,8 @@ adminSchema.pre("save", async () => {
   next();
 });
 
-adminSchema.methods.comparePassword = async function (hashedPassword) {
-  return await bcrypt.compare(hashedPassword, this.password);
+adminSchema.methods.comparePassword = async function (conditial) {
+  return await bcrypt.compare(conditial, this.password);
 };
 
 adminSchema.statics.isExist = async function (email) {
