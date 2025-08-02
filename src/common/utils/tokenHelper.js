@@ -1,6 +1,7 @@
 const jwt = require("jsonwebtoken");
 const { ACCESS_TOKEN_SEC, REFRESH_TOKEKN_SEC } = require("../config");
-exports.sign = async function (admin) {
+const AppError = require("./Error");
+exports.sign = function (admin) {
   const accessToken = jwt.sign(
     { id: admin._id, email: admin.email },
     ACCESS_TOKEN_SEC,
@@ -14,4 +15,18 @@ exports.sign = async function (admin) {
   );
 
   return { accessToken, refreshToken };
+};
+
+exports.verify = async function (token, type = "access") {
+  if (!["access", "refresh"].includes(type.toLowerCase()))
+    throw new AppError("invalid type: 'access' or 'refresh'");
+
+  const isValid = jwt.verify(
+    token,
+    token === "access" ? ACCESS_TOKEN_SEC : REFRESH_TOKEKN_SEC
+  );
+
+  if (!isValid) throw new AppError("authorization failed! login required.", 401);
+
+  return isValid;
 };
