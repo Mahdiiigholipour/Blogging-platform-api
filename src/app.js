@@ -1,16 +1,12 @@
 const express = require("express");
-const router = require("./blog/router");
-const {
-  notFoundHandler,
-  exceptionHandler,
-} = require("./middleware/errorHandler");
-const AppError = require("./utils/Error");
+const router = require("./router/router");
+const AppError = require("./common/utils/Error");
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-require("./config/mongoose");
+require("./common/config/mongoose");
 
 app.use(router);
 

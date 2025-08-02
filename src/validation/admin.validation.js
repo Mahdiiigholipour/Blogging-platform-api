@@ -1,5 +1,4 @@
 const { body } = require("express-validator");
-const { body } = require("express-validator");
 
 const adminRules = {
   name: body("name")

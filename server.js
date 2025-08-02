@@ -1,7 +1,7 @@
 const http = require("http");
 const app = require("./src/app");
-const { PORT } = require("./src/config");
-const connectDB = require("./src/config/mongoose");
+const { PORT } = require("./src/common/config");
+const connectDB = require("./src/common/config/mongoose");
 
 (async () => {
   try {
