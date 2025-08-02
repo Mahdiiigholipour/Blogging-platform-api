@@ -1,5 +1,5 @@
 const BlogModel = require("../model/blog.model");
-const buildBlogFilter = require("../utils/blogFilter");
+const buildBlogFilter = require("../common/utils/blogFilter");
 const AppError = require("../utils/Error");
 
 exports.createBlog = async function (blogData) {

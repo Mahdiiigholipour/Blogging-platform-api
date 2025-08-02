@@ -13,9 +13,10 @@ exports.createBlog = async function (req, res, next) {
 
 exports.getAllBlogs = async function (req, res, next) {
   try {
-    const page = parseInt(req.query?.page, 10) || 0;
-    const limit = parseInt(req.query?.limit, 10) || 0;
+    const page = req.query?.page || 0;
+    const limit = req.query?.limit || 0;
 
+    // tags => comma-spread array
     const { title, category, tags } = req.query;
 
     const blogs = await Service.getAllBlogs(
