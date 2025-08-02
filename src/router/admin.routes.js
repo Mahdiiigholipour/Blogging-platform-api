@@ -2,9 +2,9 @@ const router = require("express").Router();
 const BlogController = require("../controller/blog.controller");
 const BlogValidation = require("../validation/blog.validation");
 const validateReq = require("../common/middleware/validateRequest");
-
+const authGuard = require("../common/middleware/authorization");
 router
-  .use(BlogValidation.idInParams, validateReq)
+  .use(authGuard, BlogValidation.idInParams, validateReq)
   .route("/blog/:id")
   .get(BlogController.getBlogById)
   .put(
