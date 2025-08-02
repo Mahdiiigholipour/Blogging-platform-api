@@ -8,6 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 require("./common/config/mongoose");
 
+require("./common/config/swagger")(app);
 app.use(router);
 
 app.use(AppError.notFoundHandler);
