@@ -1,6 +1,6 @@
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
-const PORT = require("./index");
+const {PORT} = require("./index");
 
 module.exports = function configSwagger(app) {
   const swaggerDocumet = swaggerJSDoc({
@@ -13,12 +13,12 @@ module.exports = function configSwagger(app) {
         version: "1.0.0",
       },
     },
-    apis: [process.cwd() + "/src/documention/*.swagger.js"],
+    apis: [process.cwd() + "/src/documents/*.swagger.js"],
   });
 
   const swagger = swaggerUi.setup(swaggerDocumet);
 
   app.use("/documents", swaggerUi.serve, swagger);
 
-  console.log(`swagger documention in http://localhost:${PORT}`);
+  console.log(`swagger documention in http://localhost:${PORT}/documents`);
 };

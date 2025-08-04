@@ -23,7 +23,7 @@
  *         name: tags
  *         schema:
  *           type: string
- *         description: Search by tags. note: comma-spread array
+ *         description: Search by tags (note) comma-spread array
  *     responses:
  *       200:
  *         description: List of blogs
