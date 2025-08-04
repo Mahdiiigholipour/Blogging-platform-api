@@ -18,7 +18,7 @@ module.exports = function configSwagger(app) {
 
   const swagger = swaggerUi.setup(swaggerDocumet);
 
-  app.use("/documention", swaggerUi.serve, swagger);
+  app.use("/documents", swaggerUi.serve, swagger);
 
   console.log(`swagger documention in http://localhost:${PORT}`);
 };
